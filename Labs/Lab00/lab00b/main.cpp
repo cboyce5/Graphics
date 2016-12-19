@@ -59,6 +59,153 @@ void changeSize( int w, int h ) {
     glMatrixMode( GL_MODELVIEW );
 }
 
+//Draws a tringle that is the typical rock shape and color according tot he environment
+void drawRockTriangle() {
+	
+	glPushMatrix();
+	
+	//rock color
+	glColor3f(0.78,0.78,0.61);
+	
+	//base coordinates
+	glBegin( GL_TRIANGLES );
+	glVertex2f( 0, 0 );
+	glVertex2f( 20, 0 );
+	glVertex2f( 10, 25 );
+	
+	glEnd();
+	
+	glPopMatrix();
+}
+
+void drawCornerTriangle() {
+	glPushMatrix();
+	
+	//rock color
+	glColor3f(0.88,0.88,0.61);
+	
+	//base coordinates
+	glBegin( GL_TRIANGLES );
+	glVertex2f( 0, 0 );
+	glVertex2f( 150, 0 );
+	glVertex2f( 0, 150 );
+	
+	glEnd();
+	
+	glPopMatrix();
+	
+	glPushMatrix();
+	
+	//rock color
+	glColor3f(0.88,0.88,0.61);
+	
+	//base coordinates
+	glBegin( GL_TRIANGLES );
+	glVertex2f( 511, 511 );
+	glVertex2f( 361, 511 );
+	glVertex2f( 511, 361 );
+	
+	glEnd();
+	
+	glPopMatrix();
+	
+	glPushMatrix();
+	
+	//rock color
+	glColor3f(0.88,0.88,0.61);
+	
+	//base coordinates
+	glBegin( GL_TRIANGLES );
+	glVertex2f( 511, 0 );
+	glVertex2f( 511, 150 );
+	glVertex2f( 361, 0 );
+	
+	glEnd();
+	
+	glPopMatrix();
+	
+	glPushMatrix();
+	
+	//rock color
+	glColor3f(0.88,0.88,0.61);
+	
+	//base coordinates
+	glBegin( GL_TRIANGLES );
+	glVertex2f( 0, 511 );
+	glVertex2f( 0, 361 );
+	glVertex2f( 150, 511 );
+	
+	glEnd();
+	
+	glPopMatrix();
+}
+
+//Draws a series of rock formations using the original triangle shape
+//and also applying different transformations to it
+void drawRockFormations() {
+	
+	//scaling and translation
+	glPushMatrix();
+	glTranslatef( 350, 350, 0 );
+	glScalef(1.5,1.5,1.5);
+	drawRockTriangle();
+	glPopMatrix();
+	
+	glPushMatrix();
+	glTranslatef( 175, 145, 0 );
+	glScalef(2,2,1.5);
+	drawRockTriangle();
+	glPopMatrix();
+	
+	glPushMatrix();
+	glTranslatef( 275, 225, 0 );
+	glScalef(1,3,1);
+	drawRockTriangle();
+	glPopMatrix();
+	
+	glPushMatrix();
+	glTranslatef( 125, 300, 0 );
+	glScalef(2,3,1);
+	drawRockTriangle();
+	glPopMatrix();
+	
+	//translations
+	glPushMatrix();
+	glTranslatef( 300, 300, 0 );
+	drawRockTriangle();
+	glPopMatrix();
+	
+	glPushMatrix();
+	glTranslatef( 210, 210, 0 );
+	drawRockTriangle();
+	glPopMatrix();
+	
+	glPushMatrix();
+	glTranslatef( 350, 125, 0 );
+	drawRockTriangle();
+	glPopMatrix();
+	
+	glPushMatrix();
+	glTranslatef( 210, 300, 0 );
+	drawRockTriangle();
+	glPopMatrix();
+	
+	//rotations
+	glPushMatrix();
+	glTranslatef(255, 255, 0);
+	glRotatef(20, 1, 1, 0);
+	drawRockTriangle();
+	glPopMatrix();
+	
+	//rotations
+	glPushMatrix();
+	glTranslatef(210, 210, 0);
+	glRotatef(50, 1, 1, 0);
+	drawRockTriangle();
+	glPopMatrix();
+	
+}
+
 //
 //  void renderScene()
 //
@@ -81,10 +228,7 @@ void renderScene() {
 	//***                                     ***//
 	//*******************************************//
 	
-	//rock color
-	glColor3f(0.98,0.98,0.71);
-	
-	//sky color
+	//Sky Box including the color
 	glColor3f(0.266,0.25,0.450);
 	
 	glBegin( GL_QUADS );
@@ -95,17 +239,62 @@ void renderScene() {
 	
 	glEnd();
 	
-	//rock color
+	//bottom left rock
 	glColor3f(0.98,0.98,0.71);
 	
-	glBegin( GL_TRIANGLE_STRIP );
-	glVertex2f( 90, 95 );
-	glVertex2f( 156, 121 );
-	glVertex2f( 50, 135 );
-	
-	
+	glBegin( GL_TRIANGLES );
+	glVertex2f( 0, 0 );
+	glVertex2f( 0, 200 );
+	glVertex2f( 200, 0 );
 	
 	glEnd();
+	
+	//bottom right rock
+	glColor3f(0.98,0.98,0.71);
+	
+	glBegin( GL_TRIANGLES );
+	glVertex2f( 511, 0 );
+	glVertex2f( 311, 0 );
+	glVertex2f( 511, 200 );
+	
+	glEnd();
+	
+	//top left rock
+	glColor3f(0.98,0.98,0.71);
+	
+	glBegin( GL_TRIANGLES );
+	glVertex2f( 0, 511 );
+	glVertex2f( 0, 311 );
+	glVertex2f( 200, 511 );
+	
+	glEnd();
+	
+	//top right rock
+	glColor3f(0.98,0.98,0.71);
+	
+	glBegin( GL_TRIANGLES );
+	glVertex2f( 511, 511 );
+	glVertex2f( 511, 311 );
+	glVertex2f( 311, 511 );
+	
+	glEnd();
+	
+	//main island
+	glColor3f(0.98,0.98,0.71);
+	
+	glBegin( GL_QUADS );
+	glVertex2f( 256, 0 );
+	glVertex2f( 511, 256 );
+	glVertex2f( 256, 511 );
+	glVertex2f( 0 , 256 );
+	
+	glEnd();
+	
+	//corner triagnles with different color
+	drawCornerTriangle();
+	
+	//draw the rock formations, uses all 3 transformations
+	drawRockFormations();
 
     // flush the OpenGL commands and make sure they get rendered!
     glFlush();
